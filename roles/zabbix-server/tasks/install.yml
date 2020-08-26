@@ -34,7 +34,7 @@
 - name: install packages
   become: yes
   apt:
-    name: ['python3-psycopg2','zabbix-server-pgsql','zabbix-frontend-php','php7.4-pgsql','zabbix-apache-conf','zabbix-agent','timescaledb-postgresql-12']
+    name: ['libpq-dev','python3-psycopg2','zabbix-server-pgsql','zabbix-frontend-php','php7.4-pgsql','zabbix-apache-conf','zabbix-agent','timescaledb-postgresql-12']
 
 - name: register timscaledb settings
   become: yes
