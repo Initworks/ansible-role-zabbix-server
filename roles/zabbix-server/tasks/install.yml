@@ -58,7 +58,7 @@
 
 - name: add extension for timescaledb
   become: yes
-  command: "echo "CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;" | sudo -u postgres psql zabbix"
+  command: 'echo "CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;" | sudo -u postgres psql zabbix'
 
 - name: run zabbix timescaledb settings
   become: yes
