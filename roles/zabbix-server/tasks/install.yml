@@ -53,8 +53,8 @@
   command: 'sudo -u postgres createuser zabbix && touch /iw/user creates=/iw/user'
 
 - name: create zabbix database
-  become: yes
-  command: 'sudo -u postgres createdb -O zabbix -E Unicode -T template0 zabbix && touch /iw/db creates=/iw/db'
+  become_user: postgres
+  command: 'createdb -O zabbix -E Unicode -T template0 zabbix && touch /iw/db creates=/iw/db'
 
 - name: import zabbix database
   become: yes
