@@ -1,3 +1,4 @@
+#!/bin/bash
 timescaledb-tune --quiet --yes
 sudo -u postgres createuser zabbix
 sudo -u postgres createdb -O zabbix zabbix
