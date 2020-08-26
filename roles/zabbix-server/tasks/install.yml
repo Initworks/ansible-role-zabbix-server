@@ -40,17 +40,13 @@
   become: yes
   command: "timescaledb-tune --quiet --yes"
 
-- name: Create a new database with name "zabbix"
-  become_user: postgres
-  postgresql_db:
-    name: zabbix
+- name: create postgresql user
+  become: yes
+  command: 'sudo -u postgres createuser zabbix'
 
-- name: Create zabbix user on postgresql
-  become_user: postgres
-  postgresql_user:
-    db: zabbix
-    name: zabbix
-    password: ceec4eif7ya
+- name: create zabbix database
+  become: yes
+  command: 'sudo -u postgres createdb -O zabbix -E Unicode -T template0 zabbix'
 
 - name: import zabbix database
   become: yes
