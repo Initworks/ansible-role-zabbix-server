@@ -53,12 +53,12 @@
   command: 'sudo -u postgres createuser zabbix && touch /iw/user creates=/iw/user'
 
 - name: create zabbix database
-  become_user: postgres
-  command: 'createdb -O zabbix zabbix && touch /iw/db creates=/iw/db'
+  become: yes
+  command: 'sudo -u postgres createdb -O zabbix zabbix && touch /iw/db creates=/iw/db'
 
 - name: import zabbix database
   become: yes
-  command: "zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix"
+  command: "zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix && touch /iw/import creates=/iw/import"
 
 - name: add extension for timescaledb
   become: yes
