@@ -49,8 +49,8 @@
   command: 'sudo -u postgres createdb -O zabbix -E Unicode -T template0 zabbix'
 
 - name: import zabbix database
-  become: yes
-  command: "zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix"
+  become_user: zabbix
+  command: "zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | psql zabbix"
 
 - name: add extension for timescaledb
   become: yes
