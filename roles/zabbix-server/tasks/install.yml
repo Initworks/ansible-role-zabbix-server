@@ -27,7 +27,8 @@
     state: present
 
 - name: Add ppa for timescaledb
-  - apt_repository:
+  become: yes
+  apt_repository:
     repo: ppa:timescale/timescaledb-ppa
 
 - name: install packages
