@@ -54,7 +54,7 @@
 
 - name: create zabbix database
   become_user: postgres
-  command: 'createdb -O zabbix -E Unicode -T template0 zabbix && touch /iw/db creates=/iw/db'
+  command: 'createdb -O zabbix zabbix && touch /iw/db creates=/iw/db'
 
 - name: import zabbix database
   become: yes
