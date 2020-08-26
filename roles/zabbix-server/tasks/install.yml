@@ -1,6 +1,14 @@
 ---
 #tasks to install
 #we will install zabbix 5.0 latest with postgresql and timescale db.
+
+- name: create folder to place state files of what is done
+  become: yes
+  file:
+    path: /iw
+    state: directory
+
+
 - name: Add an apt key for zabbix
   become: yes
   apt_key:
@@ -38,31 +46,25 @@
 
 - name: register timscaledb settings
   become: yes
-  run_once: true
-  command: "timescaledb-tune --quiet --yes"
+  command: "timescaledb-tune --quiet --yes && touch /iw/timescale creates=/iw/timescale"
 
 - name: create postgresql user
   become: yes
-  run_once: true
-  command: 'sudo -u postgres createuser zabbix'
+  command: 'sudo -u postgres createuser zabbix && touch /iw/user creates=/iw/user'
 
 - name: create zabbix database
   become: yes
-  run_once: true
-  command: 'sudo -u postgres createdb -O zabbix -E Unicode -T template0 zabbix'
+  command: 'sudo -u postgres createdb -O zabbix -E Unicode -T template0 zabbix && touch /iw/db creates=/iw/db'
 
 - name: import zabbix database
-  become_user: zabbix
-  run_once: true
-  command: "zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | psql zabbix"
+  become: yes
+  command: "zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix"
 
 - name: add extension for timescaledb
   become: yes
-  run_once: true
   command: 'echo "CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;" | sudo -u postgres psql zabbix'
 
 - name: run zabbix timescaledb settings
   become: yes
-  run_once: true
   command: "cat /usr/share/doc/zabbix-server-pgsql*/timescaledb.sql | sudo -u zabbix psql zabbix"
 
