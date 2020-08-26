@@ -41,12 +41,12 @@
   command: "timescaledb-tune --quiet --yes"
 
 - name: Create a new database with name "zabbix"
-  become: yes
+  become_user: postgres
   postgresql_db:
     name: zabbix
 
 - name: Create zabbix user on postgresql
-  become: yes
+  become_user: postgres
   postgresql_user:
     db: zabbix
     name: zabbix
