@@ -1,0 +1,17 @@
+---
+# tasks restart zabbix components
+- name: restart and enable zabbix server
+  become: yes
+  service:
+    name: zabbix-server
+    state: restarted
+    enabled: yes
+  when: server.changed
+
+- name: restart and enable apache
+  become: yes
+  service:
+    name: apache2
+    state: restarted
+    enabled: yes
+  when: apache.changed

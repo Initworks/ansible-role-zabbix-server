@@ -2,3 +2,6 @@
 # tasks file for roles/zabbix-server
 - name: Install zabbix-server and components
   include_tasks: install.yml
+
+- name: place configurations
+  include_tasks: configure.yml
