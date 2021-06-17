@@ -1,4 +1,9 @@
 ---
 - hosts: all
   roles:
-    - zabbix-server
+    - role: zabbix-server
+      vars:
+        dbuser: "{{dbuser}}"
+        dbname: "{{dbname}}"
+        dbpass: "{{dbpass}}"
+  
