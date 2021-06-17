@@ -1,2 +1,5 @@
 ---
-# defaults file for roles/zabbix-server
+# vars file for roles/zabbix-server
+dbuser: "zabbix"
+dbpass: "secret"
+dbname: "zabbix"
